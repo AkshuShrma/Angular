@@ -1,0 +1,35 @@
+<h2 class="text-info" mat-dialog-title>Add Employee</h2>
+<div mat-dialog-content>
+<form [formGroup]="employeeForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Employee Name</mat-label>
+        <input formControlName="name" matInput placeholder="Name">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Employee Department</mat-label>
+        <mat-select formControlName="department" placeholder="Department">
+            <mat-option>Select</mat-option>
+        <mat-option value="IT">IT</mat-option>
+        <mat-option value=".Net">.Net</mat-option>
+        <mat-option value="PHP">PHP</mat-option>
+        <mat-option value="C#">C#</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Employee Email</mat-label>
+        <input formControlName="email" matInput placeholder="Email">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Employee Phone</mat-label>
+        <input formControlName="phone" matInput placeholder="Phone">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Employee Salary</mat-label>
+        <input formControlName="salary" matInput placeholder="Salary">
+      </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-action [align]="'end'"> 
+    <button style="margin-right: 10px" mat-raised-button color="warn" (click)="AddEmployee()">{{actionBtn}}</button>
+    <button  style="margin-right: 125px" mat-raised-button color="primary"  mat-dialog-close>Cancel</button>
+</div>
