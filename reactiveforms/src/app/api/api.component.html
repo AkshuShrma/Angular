@@ -1,38 +1,20 @@
-<!-- <div class="row">
-    <div class="co-md-12">
-        <h2 class="app-title">Api</h2>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-offset-1 col-md-5">
-        <div class="panel panel-info">
-            <div class="panel-heading">form</div>
-            <div class="panel-body">
-                 <form autocomplete="off" [FormGroup]="employees"></form> 
-            </div>
-        </div>
-    </div> 
-</div> -->
  <mat-toolbar color="primary">
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
      <mat-icon>supervised_user_circle</mat-icon>
    </button>
-   <span>Material UI</span><br/>
-    <button style="margin-left: 20px" mat-fab color="warn" (click)="openDial()" aria-label="Example icon button with a add icon ">
-      <mat-icon>add</mat-icon>
-    </button>
-   <span class="example-spacer"></span>
-   <div class="example-button-container">
-    <button style="margin-right: 100px" mat-fab color="warn" (click)="openDialog()"><mat-icon>add</mat-icon></button>
-  </div>
+   <span>Material UI</span>
  </mat-toolbar> 
  <div class="container">
-    <div style="margin-top: 10px">
+   <div style="margin-top: 8px">
+    <div class="example-button-container">
+      <h2 class="text-primary text-center">Add Record</h2>
+      <button style="margin-left: 560px" mat-fab color="warn" (click)="openDialog()"><mat-icon>add</mat-icon></button>
+    </div>
+    <br/>
     <mat-form-field>
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
 </mat-form-field>
-
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
 

@@ -2,6 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit,Inject } from '@angular/core';
 import { BasckendService } from '../basckend.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-dailog',
@@ -15,6 +16,7 @@ export class DailogComponent implements OnInit {
   actionBtn:string = "Save"
 
   constructor(
+    private notify:NotificationService,
     @Inject(MAT_DIALOG_DATA) public editData:any,
     private dialogRef:MatDialogRef<DailogComponent>,
     private employeeService: BasckendService,
@@ -48,13 +50,12 @@ export class DailogComponent implements OnInit {
     if(this.employeeForm.valid){
       this.employeeService.AddEmployees(this.employeeForm.value).subscribe({
         next:(result)=>{
-          alert("Data added successfully");
+          this.notify.showSuccess(result.data,"Adding Record")
           this.employeeForm.reset();
           this.dialogRef.close('save');
         },
         error:(err)=>{
-          alert("Somthing wrong");
-        }
+          this.notify.showError(err.data,"Check Backend")        }
       })
     }
    }else{
@@ -64,12 +65,12 @@ export class DailogComponent implements OnInit {
   UpdateData(){
     this.employeeService.updateEmployees(this.employeeForm.value,this.editData.id).subscribe({
       next:(result)=>{
-        alert("Data updated successfully");
+        this.notify.showSuccess(result.data,"Update the Record")
         this.employeeForm.reset();
         this.dialogRef.close('update');
       },
       error:(err)=>{
-        alert("Somthing wrong with service or api");
+        this.notify.showError(err.data,"Check Backend")
       }
     })
   }

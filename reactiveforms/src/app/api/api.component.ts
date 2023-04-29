@@ -8,6 +8,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Employee } from '../models/employee';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-api',
@@ -22,7 +23,10 @@ export class ApiComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
- constructor(public dialog: MatDialog,private api:BasckendService) {}
+ constructor(
+  private notify:NotificationService,
+  public dialog: MatDialog,
+  private api:BasckendService) {}
 
  ngOnInit(): void {
    this.getAll();
@@ -66,12 +70,11 @@ export class ApiComponent implements OnInit {
  deleteEmployee(id:any){
     this.api.deleteEmployees(id).subscribe({
       next:(res)=>{
-        alert("Data deleted successfull");
+        this.notify.showSuccess(res.data,"Deleting the record");
         this.getAll();
       },
-      error:()=>{
-        alert("Try again later");
-      }
+      error:(err)=>{
+        this.notify.showError(err.data,"Check Backend")      }
     })
  }
  

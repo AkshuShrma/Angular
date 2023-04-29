@@ -35,18 +35,22 @@ namespace FirstAngularAPI.Controllers
     public async Task<IActionResult> Post([FromBody] Employee employee)
     {
       await _employee.AddEmployee(employee);
-      if (employee == null) return BadRequest("Data Not Added");
-      return Ok(employee);
+      if (employee == null) return BadRequest(new { status = 0, Data = "Data not added" });
+      return Ok(new { status = 1, Data = "Data added successfully" });
     }
     [HttpPut("{id}")]
-    public async Task Update(int id, [FromBody] Employee employee)
+    public async Task<IActionResult> Update(int id, [FromBody] Employee employee)
     {
       await _employee.UpdateEmployee(id, employee);
+      if (employee == null) return BadRequest(new { status = 0, Data = "Data not updated" });
+      return Ok(new {status=1,Data="Data updated successfully" });
     }
     [HttpDelete("{id}")]
-    public async Task Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
       await _employee.DeleteEmployee(id);
+      if (id == 0) return BadRequest(new { status = 0, Data = "Data not deleted" });
+      return Ok(new { status = 1, Data = "Data deleted successfully" });
     }
   }
 }
